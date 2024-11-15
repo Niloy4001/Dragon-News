@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
+    const emailRef = useRef()
+    const passwordRef = useRef()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const email = emailRef.current.value
+        const password = passwordRef.current.value
+        // const email = e.target.value
+        // const email = e.target.value
+
+        console.log(email, password);
+
+    }
     return (
-        <div className="card bg-white w-full max-w-lg p-6 shrink-0 ">
+        // <div className="card bg-white w-full max-w-lg p-6 shrink-0 ">
+        <div className="card bg-black w-full max-w-lg p-6 shrink-0 ">
             <h1 className='text-4xl text-[#403F3F] font-semibold text-center'>Register your account</h1>
-            <form className="card-body">
+            <form className="card-body" onSubmit={handleSubmit}>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-xl text-[#403F3F] font-semibold ">Name</span>
@@ -16,19 +30,19 @@ const Register = () => {
                     <label className="label">
                         <span className="label-text text-xl text-[#403F3F] font-semibold ">Photo Link</span>
                     </label>
-                    <input type="text" placeholder="https://i.ibb.co/61D8xbL/logo.png" className="input input-bordered bg-[#F3F3F3] border-none"  />
+                    <input type="text" placeholder="https://i.ibb.co/61D8xbL/logo.png" className="input input-bordered bg-[#F3F3F3] border-none" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-xl text-[#403F3F] font-semibold ">Email</span>
                     </label>
-                    <input type="email" placeholder="Enter your email address" className="input input-bordered bg-[#F3F3F3] border-none" required />
+                    <input ref={emailRef} type="email" placeholder="Enter your email address" className="input input-bordered bg-[#F3F3F3] border-none" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-xl text-[#403F3F] font-semibold ">Password</span>
                     </label>
-                    <input type="password" placeholder="Enter your password" className="input input-bordered bg-[#F3F3F3] border-none" required />
+                    <input ref={passwordRef} type="password" placeholder="Enter your password" className="input input-bordered bg-[#F3F3F3] border-none" required />
                     <label className="label">
                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                     </label>

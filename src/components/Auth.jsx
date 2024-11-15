@@ -4,7 +4,8 @@ import { Outlet } from 'react-router-dom';
 
 const Auth = () => {
     return (
-        <div className='bg-[#F3F3F3]'>
+        // <div className='bg-[#F3F3F3]'>
+        <div className='bg-black'>
             <header className='w-11/12 mx-auto py-5'>
                 <Navbar></Navbar>
             </header>
