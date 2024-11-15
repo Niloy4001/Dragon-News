@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaShareAlt,  FaStar } from 'react-icons/fa';
 import { IoIosEye } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const SingleCard = ({ news }) => {
   return (
@@ -24,7 +25,7 @@ const SingleCard = ({ news }) => {
       <img
         src={news.thumbnail_url}
         alt="banner"
-        className="w-full h-64 object-cover rounded-sm"
+        className="w-full h-[500px] object-fill rounded-sm"
       />
       </div>
 
@@ -32,9 +33,10 @@ const SingleCard = ({ news }) => {
       <div className="p-4">
         <h2 className="font-bold text-lg mb-2">{news.title}</h2>
         <p className="text-xs text-gray-500 mb-3">
-          {news.details.slice(0, 100)}...
+          {news.details.slice(0, 250)}...
         </p>
-        <button className="text-blue-500 font-semibold hover:underline">Read More</button>
+        <Link to={`/news/details/${news._id}`} 
+          className="text-blue-500 font-semibold hover:underline">Read More</Link>
       </div>
 
       {/* Footer with Rating and Icons */}
@@ -51,7 +53,7 @@ const SingleCard = ({ news }) => {
         <span className="text-sm font-semibold ml-2">{news.rating.number}</span>
 
         {/* Like icon and view count */}
-        <IoIosEye className="ml-auto text-gray-500 hover:text-red-500 cursor-pointer" />
+        <IoIosEye className="ml-auto text-gray-500 cursor-pointer text-xl" />
         <span className="ml-2 text-gray-500">{news.total_view}</span>
       </div>
     </div>

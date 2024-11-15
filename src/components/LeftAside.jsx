@@ -19,7 +19,15 @@ const LeftAside = () => {
             <h2 className='font-semibold text-xl text-[#403F3F]'> All Category {categories.length}</h2>
             <div className='flex flex-col gap-2 w-full'>
                 {
-                    categories.map((category) => <NavLink to={`category/${category.category_id}`} key={category.category_id} className="w-full text-[#9F9F9F] font-medium text-xl"><button className='btn bg-base-300 rounded-none  w-full flex justify-start '>{category.category_name}</button></NavLink>)
+                    categories.map((category) =>
+                        <button className='btn px-0' key={category.category_id}>
+                            <NavLink to={`category/${category.category_id}`} 
+                                className="w-full h-full flex justify-start items-center px-2">
+                                {/* <button className='btn'>{category.category_name}</button> */}
+                                {category.category_name}
+                            </NavLink>
+                        </button>
+                    )
                 }
             </div>
         </div>

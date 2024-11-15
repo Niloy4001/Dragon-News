@@ -2,6 +2,11 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import NewsCards from "../components/NewsCards";
 import { id } from "date-fns/locale";
+import NewsDetails from "../components/NewsDetails";
+import Auth from "../components/Auth";
+import Login from "../components/Login";
+import Register from "../components/Register";
+import ForgotPassword from "../components/ForgotPassword";
 
 
 
@@ -19,6 +24,29 @@ const router = createBrowserRouter([
                 path:"/category/:id",
                 element:<NewsCards></NewsCards>,
                 loader: ({params}) => fetch(`https://openapi.programming-hero.com/api/news/category/${params.id}`)
+            }
+        ]
+    },
+    {
+        path:"/news/details/:id",
+        element:<NewsDetails></NewsDetails>,
+        loader: ({params})=> fetch(`https://openapi.programming-hero.com/api/news/${params.id}`)
+    },
+    {
+        path:"/auth",
+        element:<Auth></Auth>,
+        children:[
+            {
+                path:"/auth/",
+                element:<Login></Login>
+            },
+            {
+                path:"/auth/register",
+                element:<Register></Register>
+            },
+            {
+                path:"/auth/forgot",
+                element:<ForgotPassword></ForgotPassword>
             }
         ]
     },

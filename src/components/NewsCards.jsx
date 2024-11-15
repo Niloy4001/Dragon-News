@@ -4,7 +4,7 @@ import SingleCard from './SingleCard';
 
 const NewsCards = () => {
     const { data : news} = useLoaderData()
-    console.log(news);
+    // console.log(news);
 
     return (
         <div>

@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-a .active{
-    background-color: #E7E7E7;
+.active{
+    background-color: rgba(128, 128, 128, 0.418);
     color: black;
     font-size: larger;
 }

@@ -1,7 +1,5 @@
 ![Dragoon News Logo](https://i.ibb.co/61D8xbL/logo.png)
 
-# Dragoon News 📰
-
 **Dragoon News** is a responsive front-end web application built with React. It delivers real-time news articles on various topics and includes user authentication for personalized access, utilizing Firebase for secure login functionality. This project uses modern web technologies to ensure a seamless user experience across devices.
 
 ## Key Features
