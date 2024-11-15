@@ -1,18 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './AuthProvider';
 
 const Register = () => {
+    // use ref hook
     const emailRef = useRef()
     const passwordRef = useRef()
 
+    // use context hook
+    const { createUserWithEmailPassword, user } = useContext(AuthContext)
+
+
+    // handel submit 
     const handleSubmit = (e) => {
         e.preventDefault()
         const email = emailRef.current.value
         const password = passwordRef.current.value
         // const email = e.target.value
         // const email = e.target.value
+        createUserWithEmailPassword(email, password)
 
-        console.log(email, password);
+        // console.log(createUserWithEmailPassword);
 
     }
     return (
