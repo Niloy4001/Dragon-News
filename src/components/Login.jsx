@@ -1,15 +1,23 @@
 import React, { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthProvider';
 
 const Login = () => {
+    // use location hook
+    // const location = useLocation()
+    const { state} = useLocation()
+    // console.log(state);
+    
+
+    // use navigate hook
+    const navigate = useNavigate()
 
     // use ref hook
     const emailRef = useRef()
     const passwordRef = useRef()
 
     // use context hook
-    const { logInUserWithEmailPassword, user } = useContext(AuthContext)
+    const { logInUserWithEmailPassword, user,loading } = useContext(AuthContext)
 
 
     // handel submit 
@@ -18,8 +26,17 @@ const Login = () => {
         const email = emailRef.current.value
         const password = passwordRef.current.value
         logInUserWithEmailPassword(email, password)
+        .then(res => {
+            navigate(state ? `${state}` : `/`)
+        })
 
-        // console.log(createUserWithEmailPassword);
+        // console.log(state);
+
+
+        
+        // navigate('/')
+        // location?.state && navigate(`${location.state}`)
+        // navigate(`${state}`)
 
     }
 

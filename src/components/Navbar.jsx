@@ -5,24 +5,26 @@ import { AuthContext } from './AuthProvider';
 
 function Navbar() {
     const { user, sign_Out } = useContext(AuthContext)
-    console.log(user);
+    // console.log(user);
 
     return (
         <nav className="flex justify-between items-center pt-4 ">
-            <div></div>
+            <div className='text-xl font-semibold'>
+                <p>{user?.displayName && user.displayName} </p>
+            </div>
             {/* Middle Side Links */}
             <div className="flex space-x-4 text-gray-600">
                 <Link to={'/'} className="hover:text-black">Home</Link>
-                <Link className="hover:text-black">About</Link>
-                <Link className="hover:text-black">Career</Link>
+                <Link to={'/about'} className="hover:text-black">About</Link>
+                <Link to={'/career'} className="hover:text-black">Career</Link>
             </div>
 
             {/* Right Side (Login Button and Icon) */}
             <div className="flex items-center space-x-2">
-                <img src={userImg} alt="" /> {/* User icon */}
+                <img src={user?.photoURL ? user.photoURL : userImg} alt="" className='w-11 h-11 rounded-full' /> {/* User icon */}
                 {
                     user ?
-                        <Link onClick={sign_Out} to={'/auth'} className="btn bg-gray-800 text-white hover:bg-gray-900 rounded-none">Log Out</Link>
+                        <Link onClick={sign_Out} className="btn bg-gray-800 text-white hover:bg-gray-900 rounded-none">Log Out</Link>
                         :
                         <Link to={'/auth'} className="btn bg-gray-800 text-white hover:bg-gray-900 rounded-none">Login</Link>
                 }

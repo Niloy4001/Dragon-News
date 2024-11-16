@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaGoogle, FaGithub, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { AuthContext } from './AuthProvider';
 
 function Social() {
+    const {logInByGoogle, logInByGithub} = useContext(AuthContext)
     return (
         <div className="p-4 space-y-4">
             {/* Login with Google and GitHub */}
             <div>
                 <h2 className="text-lg font-semibold mb-2">Login With</h2>
-                <button className="btn btn-outline w-full flex items-center justify-center space-x-2 mb-2">
+                <button 
+                    onClick={logInByGoogle}
+                    className="btn btn-outline w-full flex items-center justify-center space-x-2 mb-2">
                     <FaGoogle className="text-blue-500" />
                     <span>Login with Google</span>
                 </button>
-                <button className="btn btn-outline w-full flex items-center justify-center space-x-2">
+                <button 
+                    onClick={logInByGithub}
+                    className="btn btn-outline w-full flex items-center justify-center space-x-2">
                     <FaGithub className="text-gray-700" />
                     <span>Login with Github</span>
                 </button>

@@ -8,7 +8,7 @@ const Register = () => {
     const passwordRef = useRef()
 
     // use context hook
-    const { createUserWithEmailPassword, user } = useContext(AuthContext)
+    const { createUserWithEmailPassword, user, updateUserProfile } = useContext(AuthContext)
 
 
     // handel submit 
@@ -16,29 +16,32 @@ const Register = () => {
         e.preventDefault()
         const email = emailRef.current.value
         const password = passwordRef.current.value
-        // const email = e.target.value
-        // const email = e.target.value
+        const name = e.target.name.value
+        const photoURL = e.target.photo.value
         createUserWithEmailPassword(email, password)
-
+            .then(res => {
+                // console.log(res.user)
+                
+                updateUserProfile(name, photoURL)
+            })
         // console.log(createUserWithEmailPassword);
 
     }
     return (
-        // <div className="card bg-white w-full max-w-lg p-6 shrink-0 ">
-        <div className="card bg-black w-full max-w-lg p-6 shrink-0 ">
+        <div className="card bg-white w-full max-w-lg p-6 shrink-0 ">
             <h1 className='text-4xl text-[#403F3F] font-semibold text-center'>Register your account</h1>
             <form className="card-body" onSubmit={handleSubmit}>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-xl text-[#403F3F] font-semibold ">Name</span>
                     </label>
-                    <input type="name" placeholder="Enter your name address" className="input input-bordered bg-[#F3F3F3] border-none" required />
+                    <input type="name" name='name' placeholder="Enter your name" className="input input-bordered bg-[#F3F3F3] border-none" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-xl text-[#403F3F] font-semibold ">Photo Link</span>
                     </label>
-                    <input type="text" placeholder="https://i.ibb.co/61D8xbL/logo.png" className="input input-bordered bg-[#F3F3F3] border-none" />
+                    <input type="text" name='photo' placeholder="https://i.ibb.co/61D8xbL/logo.png" className="input input-bordered bg-[#F3F3F3] border-none" />
                 </div>
                 <div className="form-control">
                     <label className="label">

@@ -1,32 +1,53 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updateProfile, GithubAuthProvider } from "firebase/auth";
 import { auth } from '../firebase/firebase.config';
 export const AuthContext = createContext()
-
-
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-
-    // useEffect(() => {
-    //     console.log(user);
-
-    // }, [user])
+    const [loading, setLoading] = useState(true)
 
     // Create User With Email and Password
     const createUserWithEmailPassword = (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(res => { console.log('sign up'); })
-            .catch(err => { console.log(err.message); })
+    
+       return createUserWithEmailAndPassword(auth, email, password)
     }
 
 
 
     // Log In User With Email and Password
     const logInUserWithEmailPassword = (email, password) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(res => { console.log('log in'); })
-            .catch(err => { console.log(err.message); })
+        return signInWithEmailAndPassword(auth, email, password)
+            
+    }
+
+    // Log in with google
+    const logInByGoogle = () => {
+        return signInWithPopup(auth, googleProvider)
+    }
+
+
+    // Log in with gitHub
+    const logInByGithub = () =>{
+        return signInWithPopup(auth, githubProvider)
+    }
+
+
+    // handle password reset
+    const passwordReset = (email) =>{
+        return sendPasswordResetEmail(auth, email)
+    }
+
+
+
+    // Update user's profile
+    const updateUserProfile = (name, photo) =>{
+        updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo,
+        })
     }
 
 
@@ -36,9 +57,10 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 setUser(currentUser)
             }
-            else{
+            else {
                 setUser(null)
             }
+            setLoading(false)
         })
         return () => {
             unsubscribe()
@@ -62,6 +84,11 @@ const AuthProvider = ({ children }) => {
         createUserWithEmailPassword,
         logInUserWithEmailPassword,
         sign_Out,
+        loading,
+        logInByGoogle,
+        passwordReset,
+        updateUserProfile,
+        logInByGithub,
     }
     return (
         <AuthContext.Provider value={contextInfo}>

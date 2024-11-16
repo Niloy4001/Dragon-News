@@ -23,7 +23,7 @@ const SingleCard = ({ news }) => {
       {/* Banner Image */}
       <div className='px-4'>
       <img
-        src={news.thumbnail_url}
+        src={news.image_url}
         alt="banner"
         className="w-full h-[500px] object-fill rounded-sm"
       />
